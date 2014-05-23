@@ -6,7 +6,11 @@
 ;; No splash screen please
 (setq inhibit-startup-message t)
 
-;; Use visual bell
+;; Keep emacs Custom-settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(load custom-file)
+
+;; Use visible bell
 (setq visible-bell t)
 
 ;; Setup appearances
