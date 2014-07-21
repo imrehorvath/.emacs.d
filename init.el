@@ -47,19 +47,19 @@
 (unless package-archive-contents
   (package-refresh-contents))
 
-(defun install-package-on-demand (pkg)
+(defun install-package-if-not-installed (pkg)
   "Install package if not installed already"
   (when (not (package-installed-p pkg))
     (package-install pkg)))
 
 ;; Setup environment variables from the user's shell.
 (when is-mac
-  (install-package-on-demand 'exec-path-from-shell)
+  (install-package-if-not-installed 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
-;; Install packages on-demand
+;; Install packages if not present
 (dolist (pkg '(paredit))
-  (install-package-on-demand pkg))
+  (install-package-if-not-installed pkg))
 
 ;; Setup Scheme
 (setq scheme-program-name "stk-simply")
@@ -71,6 +71,6 @@
   (call-interactively 'run-scheme))
 (global-set-key (kbd "C-c M-s") 'run-scheme-below)
 
-;; Use paredit for the following modes
+;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
