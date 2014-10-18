@@ -61,16 +61,6 @@
 (dolist (pkg '(paredit))
   (install-package-if-not-installed pkg))
 
-;; Setup Scheme
-(setq scheme-program-name "stk-simply")
-(defun run-scheme-below ()
-  "Run scheme below the current buffer."
-  (interactive)
-  (split-window-below)
-  (other-window 1)
-  (call-interactively 'run-scheme))
-(global-set-key (kbd "C-c M-s") 'run-scheme-below)
-
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
