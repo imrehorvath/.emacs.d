@@ -58,9 +58,12 @@
   (exec-path-from-shell-initialize))
 
 ;; Install packages if not present
-(dolist (pkg '(paredit))
+(dolist (pkg '(paredit restclient rubocop))
   (install-package-if-not-installed pkg))
 
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
+
+;; Enable rubocop when editing Ruby code
+(add-hook 'ruby-mode-hook 'rubocop-mode)
