@@ -18,10 +18,6 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-;; Use ido
-(ido-mode t)
-(setq ido-enable-flex-matching t)
-
 ;; Enable more meaningful buffer names
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
@@ -38,7 +34,8 @@
 (show-paren-mode 1)
 
 ;; Are we on a mac?
-(setq is-mac (equal system-type 'darwin))
+(defvar is-mac (equal system-type 'darwin)
+  "Boolean indicating if we are on a mac")
 
 (require 'package)
 ;; Setup and init packages
@@ -49,7 +46,7 @@
 
 (defun install-package-if-not-installed (pkg)
   "Install package if not installed already"
-  (when (not (package-installed-p pkg))
+  (unless (package-installed-p pkg)
     (package-install pkg)))
 
 ;; Setup environment variables from the user's shell.
@@ -58,12 +55,28 @@
   (exec-path-from-shell-initialize))
 
 ;; Install packages if not present
-(dolist (pkg '(paredit restclient rubocop))
+(dolist (pkg '(flx
+	       flx-ido
+	       flycheck
+	       markdown-mode
+	       paredit
+	       projectile
+	       restclient))
   (install-package-if-not-installed pkg))
+
+;; Use flx-ido
+(require 'flx-ido)
+(ido-mode t)
+(ido-everywhere t)
+(flx-ido-mode t)
+(setq ido-enable-flex-matching t)
 
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
 
-;; Enable rubocop when editing Ruby code
-(add-hook 'ruby-mode-hook 'rubocop-mode)
+;; Enable projectile globally
+(projectile-global-mode)
+
+;; Enable flycheck globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
