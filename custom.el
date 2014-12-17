@@ -4,6 +4,8 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(js-indent-level 2)
+ '(projectile-find-dir-includes-top-level t)
+ '(projectile-switch-project-action (quote projectile-find-dir))
  '(scheme-program-name "guile"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
