@@ -60,8 +60,7 @@
 	       flycheck
 	       markdown-mode
 	       paredit
-	       projectile
-	       restclient))
+	       projectile))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
