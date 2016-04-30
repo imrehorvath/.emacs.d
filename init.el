@@ -58,7 +58,9 @@
   (exec-path-from-shell-initialize))
 
 ;; Install packages if not present
-(dolist (pkg '(flx
+(dolist (pkg '(company
+	       company-restclient
+	       flx
 	       flx-ido
 	       flycheck
 	       markdown-mode
@@ -73,6 +75,12 @@
 (ido-everywhere t)
 (flx-ido-mode t)
 (setq ido-enable-flex-matching t)
+
+;; Use company globally
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
+
+(add-to-list 'company-backends 'company-restclient)
 
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
