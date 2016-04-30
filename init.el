@@ -39,7 +39,10 @@
 
 (require 'package)
 ;; Setup and init packages
-(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(when (< emacs-major-version 24)
+  ;; For important compatibility libraries like cl-lib
+  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
@@ -60,7 +63,8 @@
 	       flycheck
 	       markdown-mode
 	       paredit
-	       projectile))
+	       projectile
+	       restclient))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
