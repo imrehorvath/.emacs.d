@@ -6,7 +6,7 @@
  '(js-indent-level 2)
  '(projectile-find-dir-includes-top-level t)
  '(projectile-switch-project-action (quote projectile-find-dir))
- '(scheme-program-name "guile")
+ '(scheme-program-name "stklos")
  '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
