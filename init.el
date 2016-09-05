@@ -65,6 +65,7 @@
 	       flx
 	       flx-ido
 	       flycheck
+	       js2-mode
 	       markdown-mode
 	       paredit
 	       projectile
@@ -93,3 +94,6 @@
 
 ;; Enable flycheck globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; Use js2-mode as the major mode for JavaScript files
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
