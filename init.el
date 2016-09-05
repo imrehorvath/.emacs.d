@@ -30,8 +30,6 @@
 ;; Use ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
-(global-set-key (kbd "C-M-z")' copy-region-as-kill)
-
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
