@@ -62,11 +62,7 @@
 	       company-restclient
 	       flx
 	       flx-ido
-	       flycheck
-	       js2-mode
-	       markdown-mode
 	       paredit
-	       projectile
 	       restclient))
   (install-package-if-not-installed pkg))
 
@@ -86,12 +82,3 @@
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
-
-;; Enable projectile globally
-(projectile-global-mode)
-
-;; Enable flycheck globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Use js2-mode as the major mode for JavaScript files
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
