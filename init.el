@@ -59,11 +59,9 @@
 
 ;; Install packages if not present
 (dolist (pkg '(company
-	       company-restclient
 	       flx
 	       flx-ido
-	       paredit
-	       restclient))
+	       paredit))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
@@ -76,8 +74,6 @@
 ;; Use company globally
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
-
-(add-to-list 'company-backends 'company-restclient)
 
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
