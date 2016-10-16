@@ -5,9 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (paredit flx-ido flx company-restclient company exec-path-from-shell)))
- '(projectile-find-dir-includes-top-level t)
- '(projectile-switch-project-action (quote projectile-find-dir))
+    (paredit flx-ido flx company exec-path-from-shell)))
  '(scheme-program-name "stklos --no-line-editor")
  '(send-mail-function (quote mailclient-send-it)))
 (custom-set-faces
