@@ -23,9 +23,11 @@
 (setq uniquify-buffer-name-style 'forward)
 
 ;; Save point position between sessions
-(require 'saveplace)
-(setq-default save-place t)
-(setq save-place-file (expand-file-name ".places" user-emacs-directory))
+(if (version< emacs-version "25.1")
+    (progn
+      (require 'saveplace)
+      (setq-default save-place t))
+  (save-place-mode 1))
 
 ;; Use ibuffer
 (global-set-key (kbd "C-x C-b") 'ibuffer)

@@ -1,7 +1,6 @@
 .DS_Store
-.places
 auto-save-list/
 elpa/
-projectile*
+places
 ido.last
 *~
