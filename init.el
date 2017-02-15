@@ -80,3 +80,6 @@
 ;; Enable paredit for the following major modes
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
+
+;; Use STKlos scheme
+(setq scheme-program-name "stklos --no-line-editor")
