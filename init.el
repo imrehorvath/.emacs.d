@@ -36,7 +36,7 @@
 (show-paren-mode 1)
 
 ;; Are we on a mac?
-(defvar is-mac (equal system-type 'darwin)
+(defconst is-mac (equal system-type 'darwin)
   "Boolean indicating if we are on a mac")
 
 (require 'package)
