@@ -29,9 +29,6 @@
       (setq-default save-place t))
   (save-place-mode 1))
 
-;; Use ibuffer
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
@@ -68,10 +65,12 @@
 
 ;; Use flx-ido
 (require 'flx-ido)
-(ido-mode t)
-(ido-everywhere t)
-(flx-ido-mode t)
+(ido-mode 1)
+(ido-everywhere 1)
+(flx-ido-mode 1)
+;; disable ido faces to see flx highlights.
 (setq ido-enable-flex-matching t)
+(setq ido-use-faces nil)
 
 ;; Use company globally
 (require 'company)
