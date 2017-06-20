@@ -80,7 +80,7 @@
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
 
-;; Use STKlos scheme
+;; Use STKlos Scheme
 (setq scheme-program-name "stklos --no-line-editor")
 
 ;; Use GNU Smalltalk
