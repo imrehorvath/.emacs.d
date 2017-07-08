@@ -83,7 +83,3 @@
 ;; Use STKlos Scheme
 (setq scheme-program-name "stklos --no-line-editor")
 
-;; Use GNU Smalltalk
-(push '("\\.st\\'" . smalltalk-mode) auto-mode-alist)
-(autoload 'smalltalk-mode "/usr/local/share/emacs/site-lisp/gnu-smalltalk/smalltalk-mode.el" "" t)
-(autoload 'gst "/usr/local/share/emacs/site-lisp/gnu-smalltalk/gst-mode.el" "" t)
