@@ -80,6 +80,6 @@
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'scheme-mode-hook 'enable-paredit-mode)
 
-;; Use STKlos Scheme
-(setq scheme-program-name "stklos --no-line-editor")
+;; Use Guile scheme
+(setq scheme-program-name "guile --no-auto-compile")
 
