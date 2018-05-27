@@ -60,7 +60,8 @@
 (dolist (pkg '(company
 	       flx
 	       flx-ido
-	       paredit))
+	       paredit
+	       restclient))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
