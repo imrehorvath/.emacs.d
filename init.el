@@ -67,7 +67,8 @@
 	       flx
 	       flx-ido
 	       paredit
-	       restclient))
+	       restclient
+	       yaml-mode))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
