@@ -68,7 +68,9 @@
 	       flx-ido
 	       paredit
 	       restclient
-	       yaml-mode))
+	       yaml-mode
+	       elpy
+	       flycheck))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
@@ -91,3 +93,10 @@
 ;; Use Guile scheme
 (setq scheme-program-name "guile --no-auto-compile")
 
+;; Setup elpy
+(elpy-enable)
+
+;; use flycheck not flymake with elpy
+(when (require 'flycheck nil t)
+  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
+  (add-hook 'elpy-mode-hook 'flycheck-mode))
