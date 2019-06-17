@@ -6,7 +6,7 @@
  '(elpy-rpc-python-command "python3")
  '(package-selected-packages
    (quote
-    (flycheck elpy yaml-mode flx restclient paredit flx-ido exec-path-from-shell company)))
+    (py-autopep8 flycheck elpy yaml-mode flx restclient paredit flx-ido exec-path-from-shell company)))
  '(python-shell-interpreter "python3"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
