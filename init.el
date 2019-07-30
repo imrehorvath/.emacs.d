@@ -36,6 +36,9 @@
 (defconst is-mac (equal system-type 'darwin)
   "Boolean indicating if we are on a mac")
 
+;; Set GnuTLS algorithm priority to fix issue with package refresh.
+(setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3")
+
 (require 'package)
 (let* ((no-ssl (and (memq system-type '(windows-nt ms-dos))
                     (not (gnutls-available-p))))
