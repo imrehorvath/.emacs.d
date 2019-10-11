@@ -80,10 +80,7 @@ There are two things you can do about this warning:
 	       flx-ido
 	       paredit
 	       restclient
-	       yaml-mode
-	       elpy
-	       flycheck
-	       py-autopep8))
+	       yaml-mode))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
@@ -105,16 +102,3 @@ There are two things you can do about this warning:
 
 ;; Use Guile scheme
 (setq scheme-program-name "guile --no-auto-compile")
-
-;; Setup elpy
-(elpy-enable)
-
-;; use flycheck not flymake with elpy
-(when (require 'flycheck nil t)
-  (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-  (add-hook 'elpy-mode-hook 'flycheck-mode))
-
-;; enable autopep8 formatting on save
-(require 'py-autopep8)
-(add-hook 'elpy-mode-hook 'py-autopep8-enable-on-save)
-;; (setq py-autopep8-options '("--max-line-length=100"))
