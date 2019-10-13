@@ -79,7 +79,6 @@ There are two things you can do about this warning:
 	       flx
 	       flx-ido
 	       paredit
-	       restclient
 	       yaml-mode))
   (install-package-if-not-installed pkg))
 
