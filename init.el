@@ -78,8 +78,7 @@ There are two things you can do about this warning:
 (dolist (pkg '(company
 	       flx
 	       flx-ido
-	       paredit
-	       yaml-mode))
+	       paredit))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
