@@ -12,6 +12,9 @@
 ;; Use visible bell
 (setq visible-bell t)
 
+;; Setup dired
+(setq dired-dwim-target t)
+
 ;; Setup appearances
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
