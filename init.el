@@ -35,6 +35,9 @@
 ;; Highlight matching parentheses when the point is on them.
 (show-paren-mode 1)
 
+;; Enable buffer size indication
+(size-indication-mode)
+
 ;; Are we on a mac?
 (defconst is-mac (equal system-type 'darwin)
   "Boolean indicating if we are on a mac")
