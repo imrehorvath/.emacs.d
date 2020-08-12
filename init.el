@@ -38,6 +38,9 @@
 ;; Enable buffer size indication
 (size-indication-mode)
 
+;; Set default directory to user home
+(setq default-directory (concat (getenv "HOME") "/"))
+
 ;; Are we on a mac?
 (defconst is-mac (equal system-type 'darwin)
   "Boolean indicating if we are on a mac")
