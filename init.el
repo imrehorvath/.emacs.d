@@ -38,8 +38,10 @@
 ;; Enable buffer size indication
 (size-indication-mode)
 
-;; Set default directory to user home
-(setq default-directory (concat (getenv "HOME") "/"))
+;; Set the default directory to user home, when we launch the Cocoa app, and the default-directory is "/".
+(when (and (eq window-system 'ns)
+	   (string= default-directory "/"))
+  (setq default-directory (concat (getenv "HOME") "/")))
 
 ;; Are we on a mac?
 (defconst is-mac (equal system-type 'darwin)
