@@ -39,9 +39,9 @@
 (size-indication-mode)
 
 ;; Set the default directory to user home, when we launch the Cocoa app, and the default-directory is "/".
-(when (and (eq window-system 'ns)
-	   (string= default-directory "/"))
-  (setq default-directory (concat (getenv "HOME") "/")))
+(if (and (eq window-system 'ns)
+	 (string= default-directory "/"))
+    (setq default-directory (concat (getenv "HOME") "/")))
 
 ;; GnuTLS configuration
 (setq gnutls-verify-error t)
