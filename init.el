@@ -43,10 +43,6 @@
 	   (string= default-directory "/"))
   (setq default-directory (concat (getenv "HOME") "/")))
 
-;; Are we on a mac?
-(defconst is-mac (equal system-type 'darwin)
-  "Boolean indicating if we are on a mac")
-
 ;; GnuTLS configuration
 (setq gnutls-verify-error t)
 (setq gnutls-min-prime-bits 1024)
@@ -80,8 +76,8 @@ There are two things you can do about this warning:
   (unless (package-installed-p pkg)
     (package-install pkg)))
 
-;; Setup environment variables from the user's shell.
-(when is-mac
+;; On macOS, setup environment variables from the user's shell.
+(when (eq system-type 'darwin)
   (install-package-if-not-installed 'exec-path-from-shell)
   (exec-path-from-shell-initialize))
 
