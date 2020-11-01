@@ -43,6 +43,10 @@
 	 (string= default-directory "/"))
     (setq default-directory (concat (getenv "HOME") "/")))
 
+;; Add local lisp directory to load-path
+(add-to-list 'load-path (concat user-emacs-directory
+				(convert-standard-filename "lisp/")))
+
 ;; GnuTLS configuration
 (setq gnutls-verify-error t)
 (setq gnutls-min-prime-bits 1024)
@@ -108,3 +112,6 @@ There are two things you can do about this warning:
 
 ;; Use Guile scheme
 (setq scheme-program-name "guile --no-auto-compile")
+
+;; Logo mode
+(require 'logo-mode)
