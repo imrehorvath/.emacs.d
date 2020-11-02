@@ -6,8 +6,8 @@
 (define-derived-mode logo-mode fundamental-mode "logo"
   "Major mode for editing Logo source code"
   (setq font-lock-defaults `(((";+.*$" . font-lock-comment-face)
-			      ("\"\\(\\w\\|[.,`\"_?@#]\\)*" . font-lock-constant-face)
 			      ("\"[\\]." . font-lock-constant-face)
+			      ("\"\\(\\w\\|[.,`\"_?@#]\\)*" . font-lock-constant-face)
 			      (":\\(\\w\\|[.,`_?@#]\\)+" . font-lock-variable-name-face)
 			      ("^[ \t]*\\(to\\|\\.macro\\)[ \t]+" . font-lock-keyword-face)
 			      ("^[ \t]*end[ \t\n]+" . font-lock-keyword-face)
