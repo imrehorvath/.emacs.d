@@ -9,7 +9,7 @@
 			      ("\"[\\]." . font-lock-constant-face)
 			      ("\"\\(\\w\\|[.,`\"_?@#*]\\)*" . font-lock-constant-face)
 			      (":\\(\\w\\|[.,`_?@#*]\\)*" . font-lock-variable-name-face)
-			      ("^[ \t]*\\(to\\|\\.macro\\)\\($\\|[ \t]+\\)" . font-lock-keyword-face)
+			      ("^[ \t]*\\(to\\|\\.macro\\)[ \t]+" . font-lock-keyword-face)
 			      ("^[ \t]*end\\($\\|[ \t]+\\)" . font-lock-keyword-face)
 			      ( ,(regexp-opt logo-keywords 'words) . font-lock-keyword-face))
 			     t))
