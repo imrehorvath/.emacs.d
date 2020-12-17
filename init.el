@@ -115,3 +115,6 @@ There are two things you can do about this warning:
 
 ;; Logo mode
 (require 'logo-mode)
+
+;; Associate Arduino sketch files with c++-mode
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
