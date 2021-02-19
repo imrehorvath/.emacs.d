@@ -90,7 +90,8 @@ There are two things you can do about this warning:
 	       flx
 	       flx-ido
 	       paredit
-	       json-mode))
+	       json-mode
+	       ztree))
   (install-package-if-not-installed pkg))
 
 ;; Use flx-ido
