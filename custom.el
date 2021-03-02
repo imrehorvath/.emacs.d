@@ -6,7 +6,7 @@
  '(custom-enabled-themes '(wombat))
  '(explicit-shell-file-name "/bin/zsh")
  '(package-selected-packages
-   '(ztree json-mode flx paredit flx-ido exec-path-from-shell company)))
+   '(magit ztree json-mode flx paredit flx-ido exec-path-from-shell company)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

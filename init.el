@@ -89,8 +89,9 @@ There are two things you can do about this warning:
 (dolist (pkg '(company
 	       flx
 	       flx-ido
-	       paredit
 	       json-mode
+	       magit
+	       paredit
 	       ztree))
   (install-package-if-not-installed pkg))
 
