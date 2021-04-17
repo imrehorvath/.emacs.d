@@ -9,7 +9,7 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;; On macOS set dark mode at startup when applicable
+;; On macOS perform visual customization at startup
 (when (eq system-type 'darwin)
   (when (string= "Dark"
 		 (string-trim (shell-command-to-string
