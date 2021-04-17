@@ -9,6 +9,15 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+;; On macOS set dark mode at startup when applicable
+(when (eq system-type 'darwin)
+  (when (string= "Dark"
+		 (string-trim (shell-command-to-string
+			       "defaults read -g AppleInterfaceStyle")))
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme))
+    (load-theme 'wheatgrass t)))
+
 ;; Setup appearances
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
@@ -51,18 +60,10 @@
   (unless (package-installed-p pkg)
     (package-install pkg)))
 
-;; macOS-specific setup
+;; On macOS setup the path from the user shell
 (when (eq system-type 'darwin)
-  ;; exec-path-from-shell
   (install-package-if-not-installed 'exec-path-from-shell)
-  (exec-path-from-shell-initialize)
-  ;; Set dark mode when macOS is in dark mode
-  (when (string= "Dark"
-		 (string-trim (shell-command-to-string
-			       "defaults read -g AppleInterfaceStyle")))
-    (dolist (theme custom-enabled-themes)
-      (disable-theme theme))
-    (load-theme 'wheatgrass t)))
+  (exec-path-from-shell-initialize))
 
 ;; Install packages if not present
 (dolist (pkg '(company
