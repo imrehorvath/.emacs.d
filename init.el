@@ -9,21 +9,20 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;; Use visible bell
-(setq visible-bell t)
-
-;; Setup dired
-(setq dired-dwim-target t)
-
 ;; Setup appearances
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-;; Enable more meaningful buffer names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+;; Use visible bell
+(setq visible-bell t)
+
+;; Enable buffer size indication
+(size-indication-mode)
+
+;; Highlight matching parentheses when the point is on them.
+(show-paren-mode 1)
 
 ;; Save point position between sessions
 (if (version< emacs-version "25.1")
@@ -32,20 +31,9 @@
       (setq-default save-place t))
   (save-place-mode 1))
 
-;; Highlight matching parentheses when the point is on them.
-(show-paren-mode 1)
-
-;; Enable buffer size indication
-(size-indication-mode)
-
-;; Set the default directory to user home, when we launch the Cocoa app, and the default-directory is "/".
-(if (and (eq window-system 'ns)
-	 (string= default-directory "/"))
-    (setq default-directory (concat (getenv "HOME") "/")))
-
-;; Add local lisp directory to load-path
-(add-to-list 'load-path (concat user-emacs-directory
-				(convert-standard-filename "lisp/")))
+;; Enable more meaningful buffer names
+(require 'uniquify)
+(setq uniquify-buffer-name-style 'forward)
 
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
@@ -63,10 +51,18 @@
   (unless (package-installed-p pkg)
     (package-install pkg)))
 
-;; On macOS, setup environment variables from the user's shell.
+;; macOS-specific setup
 (when (eq system-type 'darwin)
+  ;; exec-path-from-shell
   (install-package-if-not-installed 'exec-path-from-shell)
-  (exec-path-from-shell-initialize))
+  (exec-path-from-shell-initialize)
+  ;; Set dark mode when macOS is in dark mode
+  (when (string= "Dark"
+		 (string-trim (shell-command-to-string
+			       "defaults read -g AppleInterfaceStyle")))
+    (dolist (theme custom-enabled-themes)
+      (disable-theme theme))
+    (load-theme 'wheatgrass t)))
 
 ;; Install packages if not present
 (dolist (pkg '(company
@@ -98,8 +94,20 @@
 ;; Use Guile scheme
 (setq scheme-program-name "guile --no-auto-compile")
 
+;; Associate Arduino sketch files with c++-mode
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+
+;; Add local lisp directory to load-path
+(add-to-list 'load-path (concat user-emacs-directory
+				(convert-standard-filename "lisp/")))
+
 ;; Logo mode
 (require 'logo-mode)
 
-;; Associate Arduino sketch files with c++-mode
-(add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+;; Setup dired
+(setq dired-dwim-target t)
+
+;; Set the default directory to user home, when we launch the Cocoa app, and the default-directory is "/".
+(if (and (eq window-system 'ns)
+	 (string= default-directory "/"))
+    (setq default-directory (concat (getenv "HOME") "/")))
