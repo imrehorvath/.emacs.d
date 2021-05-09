@@ -11,9 +11,16 @@
 
 ;; On macOS perform visual customization at startup
 (when (eq system-type 'darwin)
-  (when (string= "Dark"
-		 (string-trim (shell-command-to-string
-			       "defaults read -g AppleInterfaceStyle")))
+  (when (string= "dark"
+		 (do-applescript "tell application \"System Events\"
+                    tell appearance preferences
+                       if (dark mode) then
+                          return \"dark\"
+                       else
+                          return \"light\"
+                       end if
+                    end tell
+                 end tell"))
     (dolist (theme custom-enabled-themes)
       (disable-theme theme))
     (load-theme 'wheatgrass t)))
