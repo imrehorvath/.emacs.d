@@ -16,6 +16,6 @@ The idea was to have settings, which works out-of-the box, with no dependencies 
 
 ## Copyright
 
-Copyright © 2014 Imre Horvath
+Copyright © 2021 Imre Horvath
 
 Licensed under the same license as Emacs (GPL v3 or later) unless otherwise specified.
