@@ -113,9 +113,3 @@
 
 ;; Setup dired
 (setq dired-dwim-target t)
-
-;; Set the default-directory to user home if
-;; we launch the Cocoa app, and the default-directory is "/".
-;; (if (and (eq window-system 'ns)
-;; 	 (string= default-directory "/"))
-;;     (setq default-directory (concat (getenv "HOME") "/")))
