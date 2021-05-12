@@ -9,10 +9,10 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-;; On macOS, perform customization at startup
-(when (eq system-type 'darwin)
-  (if (string= "dark"
-	       (do-applescript "tell application \"System Events\"
+(defun dark-mode-enabledp ()
+  (cond ((eq system-type 'darwin)
+	 (string= "dark"
+		  (do-applescript "tell application \"System Events\"
                     tell appearance preferences
                        if (dark mode) then
                           return \"dark\"
@@ -20,9 +20,14 @@
                           return \"light\"
                        end if
                     end tell
-                 end tell"))
-      (load-theme 'wheatgrass t) ; dark theme
-    (load-theme 'whiteboard t))) ; light theme
+                 end tell")))
+	;; TODO: add check on other systems here!
+	(t nil)))
+
+;; Check if dark mode is enabled at startup, and set themes accordingly
+(if (dark-mode-enabledp)
+    (load-theme 'wheatgrass t)
+  (load-theme 'whiteboard t))
 
 ;; Setup appearances
 (when window-system
