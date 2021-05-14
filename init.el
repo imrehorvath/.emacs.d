@@ -9,7 +9,8 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
-(defun dark-mode-enabledp ()
+(defun dark-mode-enabled-p ()
+  "Determine whether dark mode is enabled or not, on all supported systems."
   (cond ((eq system-type 'darwin)
 	 (string= "dark"
 		  (do-applescript "tell application \"System Events\"
@@ -21,11 +22,13 @@
                        end if
                     end tell
                  end tell")))
-	;; TODO: add check on other systems here!
+	;; TODO: Add appropriate check for the other systems too!
+	((eq system-type 'gnu/linux) nil)
+	((eq system-type 'windows-nt) nil)
 	(t nil)))
 
 ;; Check if dark mode is enabled at startup, and set themes accordingly
-(if (dark-mode-enabledp)
+(if (dark-mode-enabled-p)
     (load-theme 'wheatgrass t)
   (load-theme 'whiteboard t))
 
