@@ -10,7 +10,11 @@
 (load custom-file)
 
 (defun dark-mode-enabled-p ()
-  "Determine whether dark mode is enabled or not, on all supported systems."
+  "Checks if the system is in dark mode.
+
+When the system-specific check for dark mode has been implemented by
+this function, returns the result of this check.
+Returns nil when the check is not implemented."
   (cond ((eq system-type 'darwin)
 	 (string= "dark"
 		  (do-applescript "tell application \"System Events\"
@@ -22,9 +26,7 @@
                        end if
                     end tell
                  end tell")))
-	;; TODO: Add appropriate check for the other systems too!
-	((eq system-type 'gnu/linux) nil)
-	((eq system-type 'windows-nt) nil)
+	;; TODO: Add check for dark mode on other systems too!
 	(t nil)))
 
 ;; Check if dark mode is enabled at startup, and set themes accordingly
