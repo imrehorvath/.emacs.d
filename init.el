@@ -9,6 +9,9 @@
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))
 (load custom-file)
 
+(defvar dark-mode-theme 'wheatgrass)
+(defvar light-mode-theme 'whiteboard)
+
 (defun dark-mode-enabled-p ()
   "Checks if the system is in dark mode.
 
@@ -29,10 +32,16 @@ Returns nil when the check is not implemented."
 	;; TODO: Add check for dark mode on other systems too!
 	(t nil)))
 
-;; Check if dark mode is enabled at startup, and set themes accordingly
-(if (dark-mode-enabled-p)
-    (load-theme 'wheatgrass t)
-  (load-theme 'whiteboard t))
+(defun match-system-dark-mode-setting ()
+  "Check if the system is in dark mode, and set themes accordingly."
+  (interactive)
+  (if (dark-mode-enabled-p)
+      (progn (disable-theme light-mode-theme)
+	     (load-theme dark-mode-theme t))
+    (disable-theme dark-mode-theme)
+    (load-theme light-mode-theme t)))
+
+(match-system-dark-mode-setting)
 
 ;; Setup appearances
 (when window-system
