@@ -2,7 +2,6 @@
 (defvar logo-keywords
   '("stop" "op" "output" "throw" "catch"))
 
-;;;###autoload
 (define-derived-mode logo-mode fundamental-mode "logo"
   "Major mode for editing Logo source code"
   (setq font-lock-defaults `(((";+.*$" . font-lock-comment-face)
