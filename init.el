@@ -132,3 +132,4 @@ Returns nil when the check is not implemented."
 
 ;; Setup dired
 (setq dired-dwim-target t)
+(setq wdired-allow-to-change-permissions t)
