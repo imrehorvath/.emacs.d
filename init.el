@@ -63,6 +63,10 @@ Returns nil when the check is not implemented."
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)
 
+;; Setup dired
+(setq dired-dwim-target t)
+(setq wdired-allow-to-change-permissions t)
+
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 ;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
@@ -138,7 +142,3 @@ Returns nil when the check is not implemented."
 
 ;; Logo mode
 (require 'logo-mode)
-
-;; Setup dired
-(setq dired-dwim-target t)
-(setq wdired-allow-to-change-permissions t)
