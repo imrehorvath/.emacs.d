@@ -98,7 +98,7 @@ Returns nil when the check is not implemented."
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
 
-;; Use Ivy
+;; Use counsel (Ivy, Swiper)
 (ivy-mode 1)
 
 (setq ivy-use-virtual-buffers t)
