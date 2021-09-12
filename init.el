@@ -19,16 +19,9 @@ When the system-specific check for dark mode has been implemented by
 this function, returns the result of this check.
 Returns nil when the check is not implemented."
   (cond ((eq system-type 'darwin)
-	 (string= "dark"
-		  (do-applescript "tell application \"System Events\"
-                    tell appearance preferences
-                       if (dark mode) then
-                          return \"dark\"
-                       else
-                          return \"light\"
-                       end if
-                    end tell
-                 end tell")))
+	 (string= "Dark"
+		  (string-trim (shell-command-to-string
+				"defaults read -g AppleInterfaceStyle"))))
 	;; TODO: Add check for dark mode on other systems too!
 	(t nil)))
 
@@ -41,6 +34,7 @@ Returns nil when the check is not implemented."
     (disable-theme dark-mode-theme)
     (load-theme light-mode-theme t)))
 
+;; Match system dark mode setting at startup
 (match-system-dark-mode-setting)
 
 ;; Setup appearances
