@@ -1,144 +1,144 @@
-;; Turn off mouse interface early in startup to avoid momentary display
+;;; init.el
+
+;; Early setup of general UI configuration
 (dolist (mode '(menu-bar-mode tool-bar-mode scroll-bar-mode))
   (when (fboundp mode) (funcall mode -1)))
 
-;; No splash screen please
 (setq inhibit-startup-message t)
 
-;; Keep emacs Custom-settings in separate file
-(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
-(load custom-file)
+;; Launch GUI app with max window size
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
 
-(defvar dark-mode-theme 'wheatgrass)
-(defvar light-mode-theme 'whiteboard)
-
-(defun dark-mode-enabled-p ()
-  "Checks if the system is in dark mode.
-
-When the system-specific check for dark mode has been implemented by
-this function, returns the result of this check.
-Returns nil when the check is not implemented."
-  (cond ((eq system-type 'darwin)
-	 (string= "Dark"
-		  (string-trim (shell-command-to-string
-				"defaults read -g AppleInterfaceStyle"))))
-	;; TODO: Add check for dark mode on other systems too!
-	(t nil)))
-
-(defun match-system-dark-mode-setting ()
-  "Check if the system is in dark mode, and set themes accordingly."
-  (interactive)
-  (if (dark-mode-enabled-p)
-      (progn (disable-theme light-mode-theme)
-	     (load-theme dark-mode-theme t))
-    (disable-theme dark-mode-theme)
-    (load-theme light-mode-theme t)))
-
-;; Match system dark mode setting at startup
-(match-system-dark-mode-setting)
-
-;; Setup appearances
+;; When emacs runs as GUI app and not in terminal
 (when window-system
   (setq frame-title-format '(buffer-file-name "%f" ("%b")))
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-;; Use visible bell
-(setq visible-bell t)
+;; Add local LISP files directory to the load-path
+(add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
-;; Enable buffer size indication
-(size-indication-mode)
+;; Store custom settings in a separate file
+(setq custom-file (locate-user-emacs-file "custom.el"))
 
-;; Highlight matching parentheses when the point is on them.
+;; Setup mode line
+(line-number-mode t)
+(column-number-mode t)
+(size-indication-mode t)
+
+;; Don't ring bell please
+(setq ring-bell-function 'ignore)
+
+;; Show matching parens everywhere
 (show-paren-mode 1)
 
-;; Save point position between sessions
+;; Use saveplace, to remember point location
 (if (version< emacs-version "25.1")
     (progn
       (require 'saveplace)
       (setq-default save-place t))
   (save-place-mode 1))
 
-;; Enable more meaningful buffer names
-(require 'uniquify)
-(setq uniquify-buffer-name-style 'forward)
+;; Treat Arduino sketch files as c++ source
+(add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
 
-;; Setup dired
-(setq dired-dwim-target t)
-(setq wdired-allow-to-change-permissions t)
-
+;; Packages setup and use use-package
 (require 'package)
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;; Comment/uncomment this line to enable MELPA Stable if desired.  See `package-archive-priorities`
-;; and `package-pinned-packages`. Most users will not need or want to do this.
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
-;; Package archive initialization
 (unless package-archive-contents
   (package-refresh-contents))
 
-(defun install-package-if-not-installed (pkg)
-  "Install package if not installed already"
-  (unless (package-installed-p pkg)
-    (package-install pkg)))
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
 
-;; On macOS setup the path from the user shell
-(when (eq system-type 'darwin)
-  (install-package-if-not-installed 'exec-path-from-shell)
+(use-package exec-path-from-shell
+  :if (eq system-type 'darwin)
+  :ensure t
+  :config
   (exec-path-from-shell-initialize))
 
-;; Install packages if not present
-(dolist (pkg '(company
-	       counsel
-	       flx
-	       json-mode
-	       magit
-	       paredit
-	       ztree))
-  (install-package-if-not-installed pkg))
+(use-package system-dark-mode
+  :config
+  (setq preferred-dark-theme 'wheatgrass)
+  (setq preferred-light-theme 'whiteboard)
+  (global-set-key (kbd "C-S-m") 'match-system-dark-mode)
+  (match-system-dark-mode))
 
-;; Use company globally
-(require 'company)
-(add-hook 'after-init-hook 'global-company-mode)
+(use-package flx
+  :ensure t)
 
-;; Use counsel (Ivy, Swiper)
-(ivy-mode 1)
+(use-package uniquify
+  :config
+  (setq uniquify-buffer-name-style 'forward))
 
-(setq ivy-use-virtual-buffers t)
-(setq enable-recursive-minibuffers t)
-(setq ivy-re-builders-alist
-      '((t . ivy--regex-ignore-order)))
+(use-package dired
+  :config
+  (setq dired-recursive-deletes 'always)
+  (setq dired-recursive-copies 'always)
+  (setq dired-dwim-target t)
+  (setq wdired-allow-to-change-permissions t))
 
-(global-set-key (kbd "C-s") 'swiper-isearch)
-(global-set-key (kbd "M-x") 'counsel-M-x)
-(global-set-key (kbd "C-x C-f") 'counsel-find-file)
-(global-set-key (kbd "M-y") 'counsel-yank-pop)
-(global-set-key (kbd "<f1> f") 'counsel-describe-function)
-(global-set-key (kbd "<f1> v") 'counsel-describe-variable)
-(global-set-key (kbd "<f1> l") 'counsel-find-library)
-(global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
-(global-set-key (kbd "<f2> u") 'counsel-unicode-char)
-(global-set-key (kbd "<f2> j") 'counsel-set-variable)
-(global-set-key (kbd "C-x b") 'ivy-switch-buffer)
-(global-set-key (kbd "C-c v") 'ivy-push-view)
-(global-set-key (kbd "C-c V") 'ivy-pop-view)
-(global-set-key (kbd "C-c C-r") 'ivy-resume)
-(global-set-key (kbd "C-t") 'counsel-company)
+(use-package company
+  :ensure t
+  :config
+  (setq company-idle-delay 0.5)
+  (global-company-mode t))
 
-;; Enable paredit for the following major modes
-(add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
-(add-hook 'scheme-mode-hook 'enable-paredit-mode)
+(use-package counsel
+  :ensure t
+  :config
+  (ivy-mode 1)
+  (setq ivy-use-virtual-buffers t)
+  (setq enable-recursive-minibuffers t)
+  (setq ivy-re-builders-alist
+	'((t . ivy--regex-ignore-order)))
+  (global-set-key (kbd "C-s") 'swiper-isearch)
+  (global-set-key (kbd "M-x") 'counsel-M-x)
+  (global-set-key (kbd "C-x C-f") 'counsel-find-file)
+  (global-set-key (kbd "M-y") 'counsel-yank-pop)
+  (global-set-key (kbd "<f1> f") 'counsel-describe-function)
+  (global-set-key (kbd "<f1> v") 'counsel-describe-variable)
+  (global-set-key (kbd "<f1> l") 'counsel-find-library)
+  (global-set-key (kbd "<f2> i") 'counsel-info-lookup-symbol)
+  (global-set-key (kbd "<f2> u") 'counsel-unicode-char)
+  (global-set-key (kbd "<f2> j") 'counsel-set-variable)
+  (global-set-key (kbd "C-x b") 'ivy-switch-buffer)
+  (global-set-key (kbd "C-c v") 'ivy-push-view)
+  (global-set-key (kbd "C-c V") 'ivy-pop-view)
+  (global-set-key (kbd "C-c C-r") 'ivy-resume)
+  (global-set-key (kbd "C-t") 'counsel-company))
 
-;; Use Guile scheme
-(setq scheme-program-name "guile --no-auto-compile")
+(use-package paredit
+  :ensure t
+  :config
+  (add-hook 'emacs-lisp-mode-hook #'paredit-mode)
+  (add-hook 'scheme-mode-hook #'paredit-mode))
 
-;; Associate Arduino sketch files with c++-mode
-(add-to-list 'auto-mode-alist '("\\.ino\\'" . c++-mode))
+(use-package magit
+  :ensure t
+  :bind (("C-x g" . magit-status)))
 
-;; Add local lisp directory to load-path
-(add-to-list 'load-path (concat user-emacs-directory
-				(convert-standard-filename "lisp/")))
+(use-package ztree
+  :ensure t)
 
-;; Logo mode
-(require 'logo-mode)
+(use-package json-mode
+  :ensure t)
+
+(use-package scheme
+  :config
+  (setq scheme-program-name "guile --no-auto-compile"))
+
+(use-package logo-mode
+  :commands logo-mode)
+
+;; Enable access from emacsclient
+(add-hook 'after-init-hook (lambda ()
+			     (require 'server)
+			     (unless (server-running-p)
+			       (server-start))))
+
+;; Load configuration, set via the customize interface, if exists
+(if (file-exists-p custom-file)
+    (load custom-file))
