@@ -12,9 +12,7 @@ When the system-specific check for dark mode has been implemented by
 this function, returns the result of this check.
 Returns nil when the check is not implemented."
   (cond ((eq system-type 'darwin)
-	 (string= "Dark"
-		  (string-trim (shell-command-to-string
-				"defaults read -g AppleInterfaceStyle"))))
+	 (= 0 (shell-command "defaults read -g AppleInterfaceStyle")))
 	;; TODO: Add check for dark mode on other systems too!
 	(t nil)))
 
