@@ -140,5 +140,5 @@
 			       (server-start))))
 
 ;; Load configuration, set via the customize interface, if exists
-(if (file-exists-p custom-file)
-    (load custom-file))
+(when (file-exists-p custom-file)
+  (load custom-file))
