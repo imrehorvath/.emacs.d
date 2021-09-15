@@ -61,8 +61,8 @@
 
 (use-package system-dark-mode
   :config
-  (setq preferred-dark-theme 'wheatgrass)
-  (setq preferred-light-theme 'whiteboard)
+  (setq preferred-dark-theme 'deeper-blue)
+  (setq preferred-light-theme 'adwaita)
   (global-set-key (kbd "C-S-m") 'match-system-dark-mode)
   (match-system-dark-mode))
 
