@@ -126,6 +126,9 @@
 (use-package json-mode
   :ensure t)
 
+(use-package swift-mode
+  :ensure t)
+
 (use-package scheme
   :config
   (setq scheme-program-name "guile --no-auto-compile"))
