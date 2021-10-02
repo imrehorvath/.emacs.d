@@ -1,4 +1,6 @@
 
+Minimal application, which gets notified about interface changes and which invokes the command supplied as arguments, as a response to the change.
+
 ```swift
 
 // Based on: https://github.com/bouk/dark-mode-notify/blob/main/dark-mode-notify.swift
@@ -19,13 +21,19 @@ DistributedNotificationCenter.default.addObserver(
 NSApplication.shared.run()
 ```
 
+Complile the code and place the binary in `/usr/local/bin`.
+
 ```shell
 swiftc dark-mode-change-notifier.swift -o /usr/local/bin/dark-mode-change-notifier
 ```
 
+Optional. Link the emacsclient command to be accessible from `/usr/local/bin` if needed.
+
 ```shell
 ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacsclient /usr/local/bin
 ```
+
+Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the arguments `emacsclient -e (match-system-dark-mode) -q`.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -57,17 +65,25 @@ ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacsclient /usr/local/bin
 </plist>
 ```
 
+Bootstrap the LaunchAgent for the default user 501.
+
 ```shell
 launchctl bootstrap gui/501/ ~/Library/LaunchAgents/com.imrehorvath.emacsdarkmodechange.agent.plist
 ```
+
+Check if it's running
 
 ```shell
 launchctl list | grep emacsdarkmodechange
 ```
 
+Bootout (turn off) the LaunchAgent.
+
 ```shell
 launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.emacsdarkmodechange.agent.plist
 ```
+
+Print some details. 
 
 ```shell
 launchctl print gui/501/com.imrehorvath.emacsdarkmodechange.agent
