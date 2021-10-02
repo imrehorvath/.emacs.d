@@ -14,6 +14,10 @@ These settings are subject to change over time as the different needs are coming
 
 The idea was to have settings, which works out-of-the box, with no dependencies on extra packages prior installing the additional packages I use.
 
+## Docs
+
+- Howto setup support for [dark mode changes on macOS](docs/darkmode_change_support_on_macos.md)
+
 ## Copyright
 
 Copyright © 2021 Imre Horvath
