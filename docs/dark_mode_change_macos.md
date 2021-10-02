@@ -2,7 +2,7 @@
 
 ## Helper application
 
-Minimal application, which gets notified about interface changes and which invokes the command supplied as arguments, as a response to the change.
+Minimalistic application, which gets notified about interface changes and invokes the command supplied as arguments, as a response to the change.
 
 ```swift
 
