@@ -1,6 +1,6 @@
 # Howto setup external support for light/dark mode changes on macOS
 
-## Helper application
+## Helper Application
 
 Minimalistic application, which gets notified about interface changes and invokes the command supplied as arguments, as a response to the change.
 
@@ -30,7 +30,7 @@ Complile the code and place the binary in `/usr/local/bin`.
 swiftc dark-mode-change-notifier.swift -o /usr/local/bin/dark-mode-change-notifier
 ```
 
-## LaunchAgent configuration
+## LaunchAgent Configuration
 
 Optionally link the emacsclient command in case it's not on the `PATH`. Otherwise skip this step.
 
@@ -69,6 +69,8 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
   </dict>
 </plist>
 ```
+
+## LaunchAgent Operation
 
 Bootstrap the LaunchAgent for the default user 501.
 
