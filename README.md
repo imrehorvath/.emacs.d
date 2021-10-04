@@ -16,7 +16,7 @@ The idea was to have settings, which works out-of-the box, with no dependencies 
 
 ## Docs
 
-- Howto setup external support for [light/dark mode changes on macOS](docs/dark_mode_change_macos.md)
+- How to set up external support for [light/dark mode changes on macOS](docs/dark_mode_change_macos.md)
 
 ## Copyright
 
