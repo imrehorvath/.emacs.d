@@ -1,8 +1,8 @@
-# Howto setup external support for light/dark mode changes on macOS
+# How to set up external support for light/dark mode changes on macOS
 
 ## Helper Application
 
-Minimalistic application, which gets notified about interface changes and invokes the command supplied as arguments, as a response to the change.
+Minimalistic application, which gets notified about interface changes and as a response to the change, invokes the command supplied as arguments.
 
 ```swift
 
@@ -32,7 +32,7 @@ swiftc dark-mode-change-notifier.swift -o /usr/local/bin/dark-mode-change-notifi
 
 ## LaunchAgent Configuration
 
-Optionally link the emacsclient command in case it's not on the `PATH`. Otherwise skip this step.
+Link the emacsclient command in case it's not on the `PATH` already. Otherwise skip this step.
 
 ```shell
 ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacsclient /usr/local/bin
@@ -84,17 +84,16 @@ Check if it's running
 launchctl list | grep emacsdarkmodechange
 ```
 
-Bootout (turn off) the LaunchAgent.
-
-```shell
-launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.emacsdarkmodechange.agent.plist
-```
-
 Print some details. 
 
 ```shell
 launchctl print gui/501/com.imrehorvath.emacsdarkmodechange.agent
 ```
 
-Copyright © 2021 Imre Horvath
-MIT License
+Bootout (turn off) the LaunchAgent.
+
+```shell
+launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.emacsdarkmodechange.agent.plist
+```
+
+Copyright © 2021 Imre Horvath, MIT License
