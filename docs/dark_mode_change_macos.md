@@ -32,7 +32,7 @@ swiftc dark-mode-change-notifier.swift -o /usr/local/bin/dark-mode-change-notifi
 
 ## LaunchAgent Configuration
 
-Link the emacsclient command in case it's not on the `PATH` already. Otherwise skip this step.
+Link the `emacsclient` command in case it's not on the `PATH` already. Otherwise skip this step.
 
 ```shell
 ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacsclient /usr/local/bin
