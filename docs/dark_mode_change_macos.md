@@ -10,13 +10,15 @@ Minimalistic application, which gets notified about interface changes and as a r
 
 import Cocoa
 
+let args = Array(CommandLine.arguments.suffix(from: 1))
+
 DistributedNotificationCenter.default.addObserver(
   forName: Notification.Name("AppleInterfaceThemeChangedNotification"),
   object: nil,
   queue: nil) { _ in
     let proc = Process()
     proc.launchPath = "/usr/bin/env"
-    proc.arguments = Array(CommandLine.arguments.suffix(from: 1))
+    proc.arguments = args
     proc.launch()
     proc.waitUntilExit()
 }
