@@ -5,12 +5,11 @@
 Minimalistic application, which gets notified about interface changes and as a response to the change, invokes the command supplied as arguments.
 
 ```swift
-
 // Based on: https://github.com/bouk/dark-mode-notify/blob/main/dark-mode-notify.swift
 
 import Cocoa
 
-let args = Array(CommandLine.arguments.suffix(from: 1))
+let args = Array(CommandLine.arguments[1...])
 
 DistributedNotificationCenter.default.addObserver(
   forName: Notification.Name("AppleInterfaceThemeChangedNotification"),
