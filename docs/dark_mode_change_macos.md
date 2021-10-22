@@ -48,14 +48,14 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
 <plist version="1.0">
   <dict>
     <key>Label</key>
-    <string>com.imrehorvath.emacsdarkmodechange.agent</string>
+    <string>com.imrehorvath.darkmodechange.emacs.agent</string>
 
     <key>EnvironmentVariables</key>
     <dict>
       <key>PATH</key>
       <string>/usr/local/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Apple/usr/bin</string>
     </dict>
-
+    
     <key>ProgramArguments</key>
     <array>
       <string>/usr/local/bin/dark-mode-change-notifier</string>
@@ -64,7 +64,7 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
       <string>(match-system-dark-mode)</string>
       <string>-q</string>
     </array>
-
+    
     <key>KeepAlive</key>
     <true/>
   </dict>
@@ -76,25 +76,25 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
 Bootstrap the LaunchAgent for the default user 501.
 
 ```shell
-launchctl bootstrap gui/501/ ~/Library/LaunchAgents/com.imrehorvath.emacsdarkmodechange.agent.plist
-```
-
-Check if it's running
-
-```shell
-launchctl list | grep emacsdarkmodechange
-```
-
-Print some details. 
-
-```shell
-launchctl print gui/501/com.imrehorvath.emacsdarkmodechange.agent
+launchctl bootstrap gui/501/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
 ```
 
 Bootout (turn off) the LaunchAgent.
 
 ```shell
-launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.emacsdarkmodechange.agent.plist
+launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
+```
+
+Check if it's running
+
+```shell
+launchctl list | grep darkmodechange
+```
+
+Print some details. 
+
+```shell
+launchctl print gui/501/com.imrehorvath.darkmodechange.emacs.agent
 ```
 
 Copyright © 2021 Imre Horvath, MIT License
