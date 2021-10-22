@@ -73,6 +73,8 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
 
 ## LaunchAgent Operation
 
+### Start/Stop
+
 Bootstrap the LaunchAgent for the default user 501.
 
 ```shell
@@ -84,6 +86,8 @@ Bootout (turn off) the LaunchAgent.
 ```shell
 launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
 ```
+
+### Status
 
 Check if it's running
 
