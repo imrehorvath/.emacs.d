@@ -25,7 +25,7 @@ DistributedNotificationCenter.default.addObserver(
 NSApplication.shared.run()
 ```
 
-Complile the code and place the binary in `/usr/local/bin`.
+Compile the code and place the binary in `/usr/local/bin`.
 
 ```shell
 swiftc dark-mode-change-notifier.swift -o /usr/local/bin/dark-mode-change-notifier
