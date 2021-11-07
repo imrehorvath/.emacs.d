@@ -75,16 +75,16 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
 
 ### Start/Stop
 
-Bootstrap the LaunchAgent for the default user 501.
+Bootstrap the LaunchAgent for the current user.
 
 ```shell
-launchctl bootstrap gui/501/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
+launchctl bootstrap gui/$UID/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
 ```
 
 Bootout (turn off) the LaunchAgent.
 
 ```shell
-launchctl bootout gui/501/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
+launchctl bootout gui/$UID/ ~/Library/LaunchAgents/com.imrehorvath.darkmodechange.emacs.agent.plist
 ```
 
 ### Status
@@ -98,7 +98,7 @@ launchctl list | grep darkmodechange
 Print some details. 
 
 ```shell
-launchctl print gui/501/com.imrehorvath.darkmodechange.emacs.agent
+launchctl print gui/$UID/com.imrehorvath.darkmodechange.emacs.agent
 ```
 
 Copyright © 2021 Imre Horvath, MIT License
