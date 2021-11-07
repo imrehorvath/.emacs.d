@@ -15,7 +15,7 @@
   (tooltip-mode -1)
   (blink-cursor-mode -1))
 
-;; Add local LISP files directory to the load-path
+;; Add user-local directory of elisp files to the load-path
 (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
 
 ;; Store custom settings in a separate file
