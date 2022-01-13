@@ -59,9 +59,12 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package night-owl-theme
+  :ensure t)
+
 (use-package system-dark-mode
   :config
-  (setq preferred-dark-theme 'deeper-blue)
+  (setq preferred-dark-theme 'night-owl)
   (setq preferred-light-theme 'adwaita)
   (global-set-key (kbd "C-S-m") 'match-system-dark-mode)
   (match-system-dark-mode))
