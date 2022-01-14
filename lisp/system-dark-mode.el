@@ -3,9 +3,6 @@
 (defvar preferred-dark-theme nil)
 (defvar preferred-light-theme nil)
 
-(defvar dark-mode-state-initialized nil)
-(defvar emacs-in-dark-mode nil)
-
 (defun system-dark-mode-enabled-p ()
   "Checks if the system is in dark mode.
 
@@ -24,16 +21,12 @@ Returns nil when the check is not implemented."
 
 Enables/disables themes in emacs to match the system-wide dark mode settings."
   (interactive)
-  (let ((system-in-dark-mode (system-dark-mode-enabled-p)))
-    (when (or (not dark-mode-state-initialized)
-	      (not (eq emacs-in-dark-mode system-in-dark-mode)))
-      (let ((theme-to-use (if system-in-dark-mode
-			      preferred-dark-theme
-			    preferred-light-theme)))
-	(when theme-to-use
-	  (dolist (theme custom-enabled-themes) (disable-theme theme))
-	  (load-theme theme-to-use t)))
-      (setq emacs-in-dark-mode system-in-dark-mode
-	    dark-mode-state-initialized t))))
+  (if (system-dark-mode-enabled-p)
+      (when preferred-dark-theme
+	(dolist (theme custom-enabled-themes) (disable-theme theme))
+	(load-theme preferred-dark-theme t))
+    (when preferred-light-theme
+      (dolist (theme custom-enabled-themes) (disable-theme theme))
+      (load-theme preferred-light-theme t))))
 
 (provide 'system-dark-mode)
