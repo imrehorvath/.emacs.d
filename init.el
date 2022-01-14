@@ -59,9 +59,6 @@
   :config
   (exec-path-from-shell-initialize))
 
-(use-package night-owl-theme
-  :ensure t)
-
 (use-package system-dark-mode
   :config
   (setq preferred-dark-theme 'night-owl)
