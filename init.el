@@ -59,12 +59,12 @@
   :config
   (exec-path-from-shell-initialize))
 
-(use-package system-dark-mode
+(use-package sysdm
   :config
-  (setq preferred-dark-theme 'night-owl)
-  (setq preferred-light-theme 'adwaita)
-  (global-set-key (kbd "C-S-m") 'match-system-dark-mode)
-  (match-system-dark-mode))
+  (setq sysdm-dark-theme 'deeper-blue)
+  (setq sysdm-light-theme 'leuven)
+  (global-set-key (kbd "C-S-m") 'sysdm-match-system-dark-mode)
+  (sysdm-match-system-dark-mode))
 
 (use-package flx
   :ensure t)

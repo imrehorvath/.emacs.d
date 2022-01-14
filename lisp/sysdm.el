@@ -1,9 +1,9 @@
-;; system-dark-mode.el
+;; sysdm.el
 
-(defvar preferred-dark-theme nil)
-(defvar preferred-light-theme nil)
+(defvar sysdm-dark-theme nil)
+(defvar sysdm-light-theme nil)
 
-(defun system-dark-mode-enabled-p ()
+(defun sysdm-dark-mode-enabled-p ()
   "Checks if the system is in dark mode.
 
 When the system-specific check for dark mode has been implemented by
@@ -16,17 +16,17 @@ Returns nil when the check is not implemented."
 	;; TODO: Add check for dark mode on other systems too!
 	(t nil)))
 
-(defun match-system-dark-mode ()
+(defun sysdm-match-system-dark-mode ()
   "Match the system dark mode settings with preferred emacs themes.
 
 Enables/disables themes in emacs to match the system-wide dark mode settings."
   (interactive)
-  (if (system-dark-mode-enabled-p)
-      (when preferred-dark-theme
+  (if (sysdm-dark-mode-enabled-p)
+      (when sysdm-dark-theme
 	(dolist (theme custom-enabled-themes) (disable-theme theme))
-	(load-theme preferred-dark-theme t))
-    (when preferred-light-theme
+	(load-theme sysdm-dark-theme t))
+    (when sysdm-light-theme
       (dolist (theme custom-enabled-themes) (disable-theme theme))
-      (load-theme preferred-light-theme t))))
+      (load-theme sysdm-light-theme t))))
 
-(provide 'system-dark-mode)
+(provide 'sysdm)
