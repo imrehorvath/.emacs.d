@@ -61,7 +61,7 @@ Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the 
       <string>/usr/local/bin/dark-mode-change-notifier</string>
       <string>emacsclient</string>
       <string>-e</string>
-      <string>(match-system-dark-mode)</string>
+      <string>(sysdm-match-system-dark-mode)</string>
       <string>-q</string>
     </array>
     
