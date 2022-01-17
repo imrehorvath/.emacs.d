@@ -4,7 +4,7 @@
 
 ;; Author: Imre Horvath <imi.horvath@gmail.com>
 ;; Created: 17 Jan 2022
-;; Keywords: themes
+;; Keywords: faces
 
 ;;; Code:
 
