@@ -21,12 +21,11 @@ Returns nil when the check is not implemented."
 
 Enables/disables themes in emacs to match the system-wide dark mode settings."
   (interactive)
+  (dolist (theme custom-enabled-themes) (disable-theme theme))
   (if (sysdm-dark-mode-enabled-p)
-      (when sysdm-dark-theme
-	(dolist (theme custom-enabled-themes) (disable-theme theme))
-	(load-theme sysdm-dark-theme t))
-    (when sysdm-light-theme
-      (dolist (theme custom-enabled-themes) (disable-theme theme))
-      (load-theme sysdm-light-theme t))))
+      (if sysdm-dark-theme
+	  (load-theme sysdm-dark-theme t))
+    (if sysdm-light-theme
+	(load-theme sysdm-light-theme t))))
 
 (provide 'sysdm)
