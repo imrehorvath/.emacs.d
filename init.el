@@ -62,7 +62,7 @@
 (use-package sysdm
   :config
   (setq sysdm-dark-theme 'deeper-blue)
-  (setq sysdm-light-theme 'leuven)
+  (setq sysdm-light-theme 'adwaita)
   (global-set-key (kbd "C-S-m") 'sysdm-match-system-dark-mode)
   (sysdm-match-system-dark-mode))
 
