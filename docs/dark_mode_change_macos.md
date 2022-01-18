@@ -39,7 +39,7 @@ Link the `emacsclient` command in case it's not on the `PATH` already. Otherwise
 ln -s /Applications/Emacs.app/Contents/MacOS/bin/emacsclient /usr/local/bin
 ```
 
-Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the arguments `emacsclient -e (match-system-dark-mode) -q`.
+Configure a LaunchAgent to run the `dark-mode-change-notifier` command with the arguments `emacsclient -e (sysdm-match-system-dark-mode) -q`.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
