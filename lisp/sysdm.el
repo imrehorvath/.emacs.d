@@ -21,7 +21,10 @@
   "User-preferred light theme."
   :type '(symbol :tag "Light theme" nil))
 
-(defun sysdm-dark-mode-enabled-p ()
+(defvar sysdm--last-enabled-theme nil
+  "Variable to store the name of the theme last enabled by this library.")
+
+(defun sysdm--dark-mode-enabled-p ()
   "Checks if the system is in dark mode.
 
 When the system-specific check for dark mode has been implemented by
@@ -34,26 +37,25 @@ Returns nil when the check is not implemented."
 	;; TODO: Add check for dark mode on other systems too!
 	(t nil)))
 
+(defun sysdm--switch-to-theme (theme)
+  "Swithch to the given theme."
+  (unless (eq sysdm--last-enabled-theme theme)
+    (if sysdm--last-enabled-theme
+	(disable-theme sysdm--last-enabled-theme))
+    (if theme
+	(if (custom-theme-p theme)
+	    (enable-theme theme)
+	  (load-theme theme t)))
+    (setq sysdm--last-enabled-theme theme)))
+
 (defun sysdm-match-system-dark-mode ()
   "Match the system dark mode settings with preferred emacs themes.
 
 Enables/disables themes in emacs to match the system-wide dark mode settings."
   (interactive)
-  (if (sysdm-dark-mode-enabled-p)
-      (when sysdm-dark-theme
-	(if (and sysdm-light-theme
-		 (memq sysdm-light-theme custom-enabled-themes))
-	    (disable-theme sysdm-light-theme))
-	(if (custom-theme-p sysdm-dark-theme)
-	    (enable-theme sysdm-dark-theme)
-	  (load-theme sysdm-dark-theme t)))
-    (when sysdm-light-theme
-      (if (and sysdm-dark-theme
-	       (memq sysdm-dark-theme custom-enabled-themes))
-	  (disable-theme sysdm-dark-theme))
-      (if (custom-theme-p sysdm-light-theme)
-	  (enable-theme sysdm-light-theme)
-	(load-theme sysdm-light-theme t)))))
+  (if (sysdm--dark-mode-enabled-p)
+      (sysdm--switch-to-theme sysdm-dark-theme)
+    (sysdm--switch-to-theme sysdm-light-theme)))
 
 (provide 'sysdm)
 
