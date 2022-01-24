@@ -38,7 +38,7 @@ Returns nil when the check is not implemented."
 	(t nil)))
 
 (defun sysdm--switch-to-theme (theme)
-  "Swithch to the given theme."
+  "Switch to the given theme."
   (unless (eq sysdm--last-enabled-theme theme)
     (if sysdm--last-enabled-theme
 	(disable-theme sysdm--last-enabled-theme))
