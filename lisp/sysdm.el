@@ -9,7 +9,7 @@
 ;;; Code:
 
 (defgroup sysdm nil
-  "Make Emacs use the user-preferred light/dark themes, based on the system settings."
+  "Make Emacs use the user-preferred light and dark themes, based on the system dark mode settings."
   :prefix "sysdm-"
   :group 'customize)
 
@@ -22,14 +22,13 @@
   :type '(symbol :tag "Light theme" nil))
 
 (defvar sysdm--last-enabled-theme nil
-  "Variable to store the name of the theme last enabled by this library.")
+  "The theme, last enabled by the sysdm library.")
 
 (defun sysdm--dark-mode-enabled-p ()
   "Checks if the system is in dark mode.
 
-When the system-specific check for dark mode has been implemented by
-this function, returns the result of this check.
-Returns nil when the check is not implemented."
+Returns t if the system is in dark mode.
+Returns nil if not in dark mode, or when the check is not implemented for the system."
   (cond ((eq system-type 'darwin)
 	 (string= "Dark"
 		  (string-trim (shell-command-to-string
@@ -49,9 +48,9 @@ Returns nil when the check is not implemented."
     (setq sysdm--last-enabled-theme theme)))
 
 (defun sysdm-match-system-dark-mode ()
-  "Match the system dark mode settings with preferred emacs themes.
+  "Match the system dark mode settings with user-preferred themes.
 
-Enables/disables themes in emacs to match the system-wide dark mode settings."
+Enables, disables themes, to match the system dark mode settings."
   (interactive)
   (if (sysdm--dark-mode-enabled-p)
       (sysdm--switch-to-theme sysdm-dark-theme)
