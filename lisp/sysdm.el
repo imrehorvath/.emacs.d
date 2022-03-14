@@ -1,4 +1,4 @@
-;;; sysdm.el --- System Dark Mode support  -*- lexical-binding: t; -*-
+;;; sysdm.el --- System Dark Mode support
 
 ;; Copyright (C) 2022 Imre Horvath
 
