@@ -9,7 +9,8 @@
 ;;; Code:
 
 (defgroup sysdm nil
-  "Make Emacs use the user-preferred light and dark themes, based on the system dark mode settings."
+  "Make Emacs use the user-preferred light and dark themes, based on the system
+ dark mode settings."
   :prefix "sysdm-"
   :group 'customize)
 
@@ -28,7 +29,8 @@
   "Checks if the system is in dark mode.
 
 Returns t if the system is in dark mode.
-Returns nil if not in dark mode, or when the check is not implemented for the system."
+Returns nil if not in dark mode, or when the check is not implemented for the
+ system."
   (cond ((eq system-type 'darwin)
 	 (string= "Dark"
 		  (string-trim (shell-command-to-string
