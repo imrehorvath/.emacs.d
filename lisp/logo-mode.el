@@ -1,4 +1,4 @@
-;;; logo-mode.el --- Logo language support  -*- lexical-binding: t; -*-
+;;; logo-mode.el --- Logo language support
 
 ;; Copyright (C) 2022 Imre Horvath
 
