@@ -10,7 +10,7 @@ Thanks guys!
 
 ## About
 
-These settings are subject to change over time as the different needs are coming and going. Also I expect to refactor it and to break it up into smaller pieces as the complexity grows.
+These settings are subject to change over time as the different needs are coming and going. It is subject to be refactored as the complexity grows. Until we get out-of-the-box support to match system dark mode setting in GNU Emacs, a workoraund is provided with this repo. For more details, please see the Docs section below!
 
 The idea was to have settings, which works out-of-the box, with no dependencies on extra packages prior installing the additional packages I use.
 
@@ -20,6 +20,6 @@ The idea was to have settings, which works out-of-the box, with no dependencies 
 
 ## Copyright
 
-Copyright © 2021 Imre Horvath
+Copyright © 2022 Imre Horvath
 
 Licensed under the same license as Emacs (GPL v3 or later) unless otherwise specified.
