@@ -59,9 +59,12 @@
   :config
   (exec-path-from-shell-initialize))
 
+(use-package dracula-theme
+  :ensure t)
+
 (use-package sysdm
   :config
-  (setq sysdm-dark-theme 'deeper-blue)
+  (setq sysdm-dark-theme 'dracula)
   (setq sysdm-light-theme 'adwaita)
   (global-set-key (kbd "C-S-m") 'sysdm-match-system-dark-mode)
   (sysdm-match-system-dark-mode))
